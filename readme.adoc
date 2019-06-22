@@ -1,0 +1,45 @@
+= Go Path Router
+
+This configures an AWS Lambda Function which will act as a router for `go` cli, this means you don't have to reference all your `go` packages using the full `github.com/{org}/{project}` path, you'll be able to use your own domain like the Kubernetes (k8s.io, sigs.k8s.io), Etcd (etcd.io), etc.
+
+== Why
+
+There are a couple reasons why this might be useful for you. 
+
+1. If you plan on moving your project around but want to be independent of `github` domains and orgs. 
+2. Shorten the package imports for cleanliness. 
+3. You like customizing things :smile:
+
+== Setup
+
+To install this you'll need to first install `sam`, if you are on macOS you can do this using `brew`.
+
+```sh
+brew tap aws/tap
+brew install aws-sam-cli
+```
+
+== Install 
+
+If you will export a view parameters that the `make` file will use. These define whcih region to deploy into, what the AWS CloudFormation Stack Name should be and what the S3 Bucket the code should be packaged into.
+
+```sh
+# S3 Bucket where the code is packaged
+export S3_BUCKET=chrishein-website-assets
+export STACK_NAME=hein-dev-code
+# Domain you want to act as your proxy
+export DOMAIN=go.hein.dev
+export AWS_REGION=us-east-1
+# For API Gateway you want to provision your cert in us-east-1 even if your deploy in another region.
+export ACM_CERT=arn:aws:acm:us-east-1:XXXXXXXXXXXX:certificate/eddb30e8-6502-46bd-b4e0-2f373c1faa8d
+# Code Path represents the Github organization to proxy to
+export CODE_PATH=github.com/christopherhein
+# Route 53 hosted zone, make sure to include a period at the end.
+export HOSTED_ZONE=hein.dev.
+```
+
+Then we can deploy the application, creating a CloudFormation stack which provisions and API Gateway and Lambda function to contain the application.
+
+```sh
+make build_and_deploy
+```

@@ -1,0 +1,4 @@
+.envrc
+packaged.yaml
+go-path-router/go-path-router
+.vscode/
