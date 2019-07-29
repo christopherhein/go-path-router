@@ -55,7 +55,8 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		Body:       resp.String(),
 		StatusCode: 200,
 		Headers: map[string]string{
-			"Content-Type": "text/html",
+			"Content-Type":  "text/html",
+			"Cache-Control": "public, max-age=86400",
 		},
 	}, nil
 }
