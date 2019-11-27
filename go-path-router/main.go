@@ -13,13 +13,13 @@ import (
 const tpl = `<html>
 	<head>
 		<meta name="go-import"
-		      content="{{.Domain}}{{.Path}}
-                   git https://{{.CodePath}}{{.Path}}">
+		      content="{{.Domain}}
+                   git https://{{.CodePath}}">
 		<meta name="go-source"
-		      content="{{.Domain}}{{.Path}}
-                   https://{{.CodePath}}{{.Path}}
-                   https://{{.CodePath}}{{.Path}}/tree/master{/dir}
-                   https://{{.CodePath}}{{.Path}}/blob/master{/dir}/{file}#L{line}">
+		      content="{{.Domain}}
+                   https://{{.CodePath}}
+                   https://{{.CodePath}}/tree/master{/dir}
+                   https://{{.CodePath}}/blob/master{/dir}/{file}#L{line}">
 		<meta http-equiv="refresh" content="0; url=https://godoc.org/{{.Domain}}{{.Path}}/">
 	</head>
 	<body>

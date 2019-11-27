@@ -15,7 +15,7 @@ package:
 	sam package --output-template-file packaged.yaml --s3-bucket ${S3_BUCKET}
 
 deploy:
-	sam deploy --template-file packaged.yaml --stack-name ${STACK_NAME} --capabilities CAPABILITY_IAM --region ${AWS_REGION} --parameter-overrides CertificateArn=${ACM_CERT} CodePath=${CODE_PATH} Domain=${DomainName} HostedZoneName=${HOSTED_ZONE}
+	sam deploy --template-file packaged.yaml --stack-name ${STACK_NAME} --capabilities CAPABILITY_IAM --region ${AWS_REGION} --parameter-overrides CertificateArn=${ACM_CERT} CodePath=${CODE_PATH} DomainName=${DOMAIN} HostedZoneName=${HOSTED_ZONE}
 
 build_and_run: build local
 
