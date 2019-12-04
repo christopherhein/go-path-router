@@ -14,13 +14,13 @@ import (
 const tpl = `<html>
 	<head>
 		<meta name="go-import"
-		      content="{{.Domain}}
-                   git https://{{.CodePath}}/{{.RepoPath}}">
+		      content="{{.Domain}}/{{.Repo}}
+                   git https://{{.CodePath}}/{{.Repo}}">
 		<meta name="go-source"
-		      content="{{.Domain}}
-                   https://{{.CodePath}}/{{.RepoPath}}
-                   https://{{.CodePath}}/{{.RepoPath}}/tree/master{/dir}
-                   https://{{.CodePath}}/{{.RepoPath}}/blob/master{/dir}/{file}#L{line}">
+		      content="{{.Domain}}/{{.Repo}}
+                   https://{{.CodePath}}/{{.Repo}}
+                   https://{{.CodePath}}/{{.Repo}}/tree/master{/dir}
+                   https://{{.CodePath}}/{{.Repo}}/blob/master{/dir}/{file}#L{line}">
 		<meta http-equiv="refresh" content="1; url=https://godoc.org/{{.Domain}}{{.Path}}/">
 	</head>
 	<body>
@@ -32,7 +32,7 @@ type goHTMLData struct {
 	Domain   string
 	CodePath string
 	Path     string
-	RepoPath string
+	Repo     string
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -41,7 +41,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		Domain:   os.Getenv("DOMAIN"),
 		CodePath: os.Getenv("CODEPATH"),
 		Path:     request.Path,
-		RepoPath: pathsplit[1],
+		Repo:     pathsplit[1],
 	}
 
 	t, err := template.New("index").Parse(tpl)
